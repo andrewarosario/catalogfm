@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import * as md5 from 'md5';
+import { LastfmHttp } from '../models/last-fm-http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export abstract class LastfmHttpService {
     return encodeURIComponent(str).replace(/%20/g, '+');
   }
 
-  protected buildURL(method: string, data: {[key: string]: string} = {}, encode: string[] = []) {
+  protected buildURL({ method, data = {}, encode = [] }: LastfmHttp) {
     const allHashData = Object.assign({}, data, { api_key: environment.apiKey, method });
     const hash = this.getHash(allHashData);
     const signature = md5(hash);
