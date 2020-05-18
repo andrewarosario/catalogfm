@@ -24,8 +24,8 @@ export class LastfmAuthGuard implements CanActivate {
 
     const token = this.localStorageService.getKey('x-access-token');
     if (!token) {
-      // this.router.navigate(['/']);
-      return true;
+      this.router.navigate(['/auth']);
+      return false;
     }
 
     return this.lastfmAuthService.authenticate(token)
