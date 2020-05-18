@@ -15,11 +15,11 @@ export class LastfmService extends LastfmHttpService {
     super();
   }
 
-  public get(data: LastfmHttp): Observable<any> {
-    return this.http.get(this.buildURL(data));
+  public get<T>(data: LastfmHttp): Observable<T> {
+    return this.http.get<T>(this.buildURL(data));
   }
 
-  public post(data: LastfmHttp): Observable<any> {
-    return this.http.post(this.buildURL(data), null);
+  public post<T>(data: LastfmHttp): Observable<T> {
+    return this.http.post<T>(this.buildURL(data), null);
   }
 }
