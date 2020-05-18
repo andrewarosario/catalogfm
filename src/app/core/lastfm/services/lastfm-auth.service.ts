@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LastfmService } from './lastfm.service';
 import { LastfmHttp } from '../models/last-fm-http';
 import { Observable } from 'rxjs';
+import { AuthenticationResponse } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
