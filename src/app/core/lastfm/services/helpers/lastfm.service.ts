@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LastfmHttpService } from './lastfm-http.service';
 import { HttpClient } from '@angular/common/http';
-import { LastfmHttp } from '../models/last-fm-http';
+import { LastfmHttp } from '../../models/last-fm-http';
 import { Observable } from 'rxjs';
 
 @Injectable({

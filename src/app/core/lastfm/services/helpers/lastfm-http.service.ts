@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import * as md5 from 'md5';
-import { LastfmHttp } from '../models/last-fm-http';
+import { LastfmHttp } from '../../models/last-fm-http';
 
 @Injectable({
   providedIn: 'root'
