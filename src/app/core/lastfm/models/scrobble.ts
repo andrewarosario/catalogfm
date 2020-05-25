@@ -4,11 +4,6 @@ interface TrackScrobble {
   song: string;
 }
 
-interface CorrectedObject {
-  corrected: '0' | '1';
-  '#text': string;
-}
-
 interface ScrobbleResponse {
   scrobbles: {
     '@attr': {
