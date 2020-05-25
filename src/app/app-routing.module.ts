@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LastfmAuthGuard } from './core/lastfm/guards/lastfm-auth.guard';
+import { LastfmCallbackAuthGuard } from './core/lastfm/guards/lastfm-callback-auth.guard';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   {
     path: 'auth',
+    canActivate: [ LastfmCallbackAuthGuard ],
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
