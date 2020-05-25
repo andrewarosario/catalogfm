@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { tap, mapTo } from 'rxjs/operators';
-import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,31 +12,28 @@ export class LastfmAuthGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private authService: AuthService,
-    private localStorageService: LocalStorageService
-  ) {
-
-  }
+    private localStorageService: LocalStorageService,
+    private userService: UserService
+  ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const token = this.getToken(next);
-    if (!token) {
+    const user = this.getToken();
+    if (!user) {
       this.router.navigate(['/auth']);
       return false;
     }
 
-    return this.authService.authenticate(token)
-      .pipe(
-        tap(res => console.log({res})),
-        mapTo(true)
-      );
+    this.userService.setUser(user);
+
+    return true;
   }
 
-  private getToken(next: ActivatedRouteSnapshot): string {
-    return this.localStorageService.getKey('key') || next.queryParams.token;
+  private getToken(): User {
+    const token = this.localStorageService.getKey('x-access-token');
+    return token ? JSON.parse(token) as User : null;
   }
 
 }
