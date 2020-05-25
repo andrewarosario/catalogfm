@@ -20,4 +20,14 @@ export class LastfmArtistService {
 
     return this.lastfmService.get<ArtistInfoResponse>(lastfmResponse);
   }
+
+  getAlbum(artist: string, album: string): Observable<AlbumInfoResponse> {
+
+    const lastfmResponse: LastfmHttp = {
+      method: 'album.getInfo',
+      data: { artist, album },
+    };
+
+    return this.lastfmService.get<AlbumInfoResponse>(lastfmResponse);
+  }
 }
