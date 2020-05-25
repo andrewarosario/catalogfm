@@ -7,6 +7,6 @@ import { environment } from 'src/environments/environment';
 export class AuthFacade {
 
   auth() {
-    location.href = `http://www.last.fm/api/auth/?api_key=${environment.apiKey}&cb=${encodeURIComponent(`${environment.baseUrl}/callback`)}`;
+    location.href = `http://www.last.fm/api/auth/?api_key=${environment.apiKey}&cb=${encodeURIComponent(`${environment.baseUrl}/auth`)}`;
   }
 }
