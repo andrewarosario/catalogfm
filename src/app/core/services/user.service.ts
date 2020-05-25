@@ -15,8 +15,13 @@ export class UserService {
     return this.userSubject$.asObservable();
   }
 
+  public get user(): User {
+    return this.userSubject$.getValue();
+  }
+
   public setUser(authResponse: AuthenticationResponse) {
-    this.userSubject$.next({ login: authResponse.session.name, session: authResponse });
+    const { name, key } = authResponse.session;
+    this.userSubject$.next({ name, key });
   }
 
 }
