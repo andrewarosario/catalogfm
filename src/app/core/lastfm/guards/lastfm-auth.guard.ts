@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LastfmAuthService } from '../services/lastfm-auth.service';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { tap, catchError, map, mapTo } from 'rxjs/operators';
+import { tap, mapTo } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 
 @Injectable({
