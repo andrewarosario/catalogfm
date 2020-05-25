@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthFacade } from '../../auth.facade';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent {
 
-  constructor() { }
+  constructor(public facade: AuthFacade) { }
 
-  ngOnInit(): void {
+  login() {
+    this.facade.auth();
   }
 
 }
