@@ -19,9 +19,8 @@ export class UserService {
     return this.userSubject$.getValue();
   }
 
-  public setUser(authResponse: AuthenticationResponse) {
-    const { name, key } = authResponse.session;
-    this.userSubject$.next({ name, key });
+  public setUser(user: User) {
+    this.userSubject$.next(user);
   }
 
 }

@@ -18,8 +18,8 @@ export class AuthService {
   public authenticate(token: string) {
     return this.lastfmAuthService.authenticate(token)
       .pipe(
-        tap(authResponse => this.localStorageService.setKey('key', authResponse.session.key)),
-        tap(authResponse => this.userService.setUser(authResponse))
+        tap(authResponse => this.localStorageService.setKey('x-access-token', JSON.stringify(authResponse.session))),
+        tap(authResponse => this.userService.setUser(authResponse.session))
       );
   }
 }
