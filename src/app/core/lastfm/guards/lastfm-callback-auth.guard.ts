@@ -20,7 +20,7 @@ export class LastfmCallbackAuthGuard implements CanActivate {
     const tokenParam = next.queryParams.token;
     if (tokenParam) {
       this.authService.authenticate(tokenParam)
-        .subscribe(() => this.router.navigate(['/home']));
+        .subscribe(() => this.router.navigate(['/scrobble']));
     }
     return true;
   }
