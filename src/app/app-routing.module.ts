@@ -16,6 +16,11 @@ const routes: Routes = [
     canActivate: [ LastfmAuthGuard ],
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
+  {
+    path: 'scrobble',
+    canActivate: [ LastfmAuthGuard ],
+    loadChildren: () => import('./scrobble/scrobble.module').then(m => m.ScrobbleModule)
+  },
 ];
 
 @NgModule({
