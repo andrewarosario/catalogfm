@@ -1,1 +1,15 @@
+<mat-toolbar color="primary">
+
+  <h1>Catalog.fm</h1>
+
+  <ng-container *ngIf="(facade.user$ | async) as user">
+    <div class="user-container">
+      <!-- <img [src]="user.avatar"/> -->
+      <span>@{{ user.name }}</span>
+    </div>
+
+  </ng-container>
+
+</mat-toolbar>
+
 <router-outlet></router-outlet>
