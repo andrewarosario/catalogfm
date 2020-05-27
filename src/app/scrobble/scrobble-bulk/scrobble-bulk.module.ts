@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrobbleBulkComponent } from './containers/scrobble-bulk/scrobble-bulk.component';
 import { Routes, RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -15,7 +17,8 @@ const routes: Routes = [
     ScrobbleBulkComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ]
 })
