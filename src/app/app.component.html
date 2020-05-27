@@ -3,13 +3,11 @@
   <h1>Catalog.fm</h1>
 
   <ng-container *ngIf="(facade.user$ | async) as user">
-    <div class="user-container">
-      <!-- <img [src]="user.avatar"/> -->
-      <span>@{{ user.name }}</span>
-    </div>
-
+    <span>{{ user.name }}</span>
   </ng-container>
 
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
