@@ -3,6 +3,7 @@ import { LastfmAuthService } from '../lastfm/services/lastfm-auth.service';
 import { UserService } from './user.service';
 import { tap } from 'rxjs/operators';
 import { LocalStorageService } from './local-storage.service';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,15 @@ export class AuthService {
         tap(authResponse => this.localStorageService.setKey('x-access-token', JSON.stringify(authResponse.session))),
         tap(authResponse => this.userService.setUser(authResponse.session))
       );
+  }
+
+  public getTokenAndSetUser(): User {
+    const token = this.localStorageService.getKey('x-access-token');
+    if (token) {
+      const decodedToken = JSON.parse(token) as User;
+      this.userService.setUser(decodedToken);
+      return decodedToken;
+    }
+    return null;
   }
 }
