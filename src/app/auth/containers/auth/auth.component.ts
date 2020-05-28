@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthFacade } from '../../auth.facade';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auth',
@@ -8,9 +10,16 @@ import { AuthFacade } from '../../auth.facade';
 })
 export class AuthComponent {
 
-  constructor(public facade: AuthFacade) { }
+  constructor(
+    public facade: AuthFacade,
+    public route: ActivatedRoute,
+  ) { }
 
-  login() {
+  public get waitingCallback() {
+    return this.route.queryParams.pipe(map(params => !!params.token));
+  }
+
+  public login() {
     this.facade.auth();
   }
 
