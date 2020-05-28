@@ -1,8 +1,8 @@
 {
   "name": "catalog-fm",
   "short_name": "catalog-fm",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#303030",
+  "background_color": "#c2185b",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
