@@ -9,13 +9,19 @@ import { AuthService } from '../../services/auth.service';
 export class LastfmCallbackAuthGuard implements CanActivate {
 
   constructor(
+    private router: Router,
     private authService: AuthService,
-    private router: Router
   ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+    const token = this.authService.getTokenAndSetUser();
+    if (token) {
+      this.router.navigate(['/scrobble']);
+      return false;
+    }
 
     const tokenParam = next.queryParams.token;
     if (tokenParam) {
