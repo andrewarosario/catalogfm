@@ -1,6 +1,6 @@
 {
-  "name": "catalog-fm",
-  "short_name": "catalog-fm",
+  "name": "Catalog.fm",
+  "short_name": "Catalog.fm",
   "theme_color": "#303030",
   "background_color": "#c2185b",
   "display": "standalone",
