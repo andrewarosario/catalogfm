@@ -29,7 +29,7 @@ export class ScrobbleBulkFacade {
   }
 
   private scrobbleTracks(tracks: TrackScrobble[]): Observable<ScrobbleResponse[]> {
-    const tracksToScrobble = tracks.map(track => this.scrobbleService.scrobbleToLastfm(track));
+    const tracksToScrobble = tracks.map(track => this.scrobbleService.scrobble(track));
 
     return forkJoin(tracksToScrobble);
   }
