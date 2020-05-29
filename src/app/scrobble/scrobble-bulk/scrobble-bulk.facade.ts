@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { LastfmUserService } from 'src/app/core/lastfm/services/lastfm-user.service';
 import { forkJoin, Observable } from 'rxjs';
+import { ScrobbleService } from '../services/scrobble.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import { forkJoin, Observable } from 'rxjs';
 export class ScrobbleBulkFacade {
 
   constructor(
-    private lastfmUserService: LastfmUserService,
+    private scrobbleService: ScrobbleService,
   ) {}
 
   public scrobble(text: string): Observable<ScrobbleResponse[]> {
@@ -29,7 +29,7 @@ export class ScrobbleBulkFacade {
   }
 
   private scrobbleTracks(tracks: TrackScrobble[]): Observable<ScrobbleResponse[]> {
-    const tracksToScrobble = tracks.map(track => this.lastfmUserService.scrobble(track));
+    const tracksToScrobble = tracks.map(track => this.scrobbleService.scrobbleToLastfm(track));
 
     return forkJoin(tracksToScrobble);
   }
