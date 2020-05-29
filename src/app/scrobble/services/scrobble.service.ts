@@ -15,8 +15,16 @@ export class ScrobbleService {
     private onlineOfflineService: OnlineOfflineService
   ) { }
 
-  public scrobbleToLastfm(track: TrackScrobble, timestamp = moment().unix()) {
+  public scrobble(track: TrackScrobble) {
+    return this.isLoggedInLastfm() ? this.scrobbleToLastfm(track) : console.log('cache', track);
+  }
+
+  private scrobbleToLastfm(track: TrackScrobble, timestamp = moment().unix()) {
     return this.lastfmUserService.scrobble(this.userService.user.key, track, timestamp);
+  }
+
+  private isLoggedInLastfm(): boolean {
+    return !!this.userService.user && this.onlineOfflineService.isOnline;
   }
 
 
