@@ -3,7 +3,6 @@ import { LastfmService } from './helpers/lastfm.service';
 import { LastfmHttp } from '../models/last-fm-http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { UserService } from '../../services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,6 @@ export class LastfmUserService {
 
   constructor(
     private lastfmService: LastfmService,
-    private userService: UserService
   ) { }
 
   public getInfo(user: string): Observable<UserResponse> {
@@ -38,7 +36,7 @@ export class LastfmUserService {
     return this.lastfmService.get<any>(lastfmResponse);
   }
 
-  public scrobble(input: TrackScrobble, timestamp: number = moment().unix()): Observable<ScrobbleResponse> {
+  public scrobble(userKey: string, input: TrackScrobble, timestamp = moment().unix()): Observable<ScrobbleResponse> {
 
     const lastfmResponse: LastfmHttp = {
       method: 'track.scrobble',
@@ -46,7 +44,7 @@ export class LastfmUserService {
         artist: input.artist,
         track: input.song,
         album: input.album,
-        sk: this.userService.user.key,
+        sk: userKey,
         timestamp: timestamp.toString(),
       },
       encode: ['album', 'artist', 'track']
