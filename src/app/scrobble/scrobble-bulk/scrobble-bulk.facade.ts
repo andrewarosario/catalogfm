@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { ScrobbleService } from '../services/scrobble.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ScrobbleBulkFacade {
     private scrobbleService: ScrobbleService,
   ) {}
 
-  public scrobble(text: string): Observable<ScrobbleResponse[]> {
+  public scrobble(text: string) {
     const tracks: TrackScrobble[] = text
     .split((/\n/))
     .map(line => this.convertLineToTrackScrobble(line));
@@ -28,9 +29,11 @@ export class ScrobbleBulkFacade {
     };
   }
 
-  private scrobbleTracks(tracks: TrackScrobble[]): Observable<ScrobbleResponse[]> {
+  private scrobbleTracks(tracks: TrackScrobble[]) {
     const tracksToScrobble = tracks.map(track => this.scrobbleService.scrobble(track));
 
-    return forkJoin(tracksToScrobble);
+    return forkJoin(tracksToScrobble).pipe(
+      map(response => response[0])
+    );
   }
 }
