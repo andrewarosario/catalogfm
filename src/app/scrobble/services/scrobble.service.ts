@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { IndexedDbScrobbles } from 'src/app/core/indexed-db/tables/indexed-db-scrobbles';
 import { mapTo } from 'rxjs/operators';
 import { ScrobbleResponseType } from 'src/app/core/models/scrobble-response-type';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +20,19 @@ export class ScrobbleService {
     private onlineOfflineService: OnlineOfflineService
   ) { }
 
-  public scrobble(track: TrackScrobble) {
+  public scrobble(track: TrackScrobble): Observable<ScrobbleResponseType> {
     return this.isLoggedInLastfm()
       ? this.scrobbleToLastfm(track)
       : this.addScrobbleToIndexedDb(track);
   }
 
-  private scrobbleToLastfm(track: TrackScrobble, timestamp = moment().unix()) {
+  private scrobbleToLastfm(track: TrackScrobble, timestamp = moment().unix()): Observable<ScrobbleResponseType> {
     return this.lastfmUserService
       .scrobble(this.userService.user.key, track, timestamp)
       .pipe(mapTo(ScrobbleResponseType.Lastfm));
   }
 
-  private addScrobbleToIndexedDb(track: TrackScrobble) {
+  private addScrobbleToIndexedDb(track: TrackScrobble): Observable<ScrobbleResponseType> {
     return this.indexedDbScrobbles
       .add(track)
       .pipe(mapTo(ScrobbleResponseType.IndexedDb));
