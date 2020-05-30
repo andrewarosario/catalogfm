@@ -1,4 +1,5 @@
 interface TrackScrobble {
+  id?: string;
   album: string;
   artist: string;
   song: string;
