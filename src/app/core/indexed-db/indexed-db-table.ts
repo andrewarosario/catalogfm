@@ -25,6 +25,10 @@ export class IndexedDbTable<T extends {id?: string}> {
     return from(this.table.delete(id));
   }
 
+  public clear() {
+    return from(this.table.clear());
+  }
+
   public getAll() {
     return from(this.table.toArray());
   }

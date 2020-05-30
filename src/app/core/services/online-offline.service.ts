@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,9 @@ export class OnlineOfflineService {
   }
 
   public get statusConnection$(): Observable<boolean> {
-    return this.statusConnectionSubject$.asObservable();
+    return this.statusConnectionSubject$.asObservable().pipe(
+      startWith(this.isOnline)
+    );
   }
 
   private setStatusConnection(): void {
