@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LastfmUserService } from 'src/app/core/lastfm/services/lastfm-user.service';
+import { LastfmUserService } from 'src/app/lastfm/services/lastfm-user.service';
 import { UserService } from 'src/app/core/services/user.service';
 import * as moment from 'moment';
 import { IndexedDbScrobbles } from 'src/app/indexed-db/tables/indexed-db-scrobbles';

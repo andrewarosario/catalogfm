@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LastfmAuthService } from '../lastfm/services/lastfm-auth.service';
+import { LastfmAuthService } from '../../lastfm/services/lastfm-auth.service';
 import { UserService } from './user.service';
 import { tap } from 'rxjs/operators';
 import { LocalStorageService } from './local-storage.service';
