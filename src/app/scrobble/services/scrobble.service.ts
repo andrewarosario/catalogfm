@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { LastfmUserService } from 'src/app/core/lastfm/services/lastfm-user.service';
 import { UserService } from 'src/app/core/services/user.service';
 import * as moment from 'moment';
-import { IndexedDbScrobbles } from 'src/app/core/indexed-db/tables/indexed-db-scrobbles';
+import { IndexedDbScrobbles } from 'src/app/indexed-db/tables/indexed-db-scrobbles';
 import { mapTo, switchMap, tap, filter } from 'rxjs/operators';
 import { ScrobbleResponseType } from 'src/app/core/models/scrobble-response-type';
 import { Observable, forkJoin } from 'rxjs';
