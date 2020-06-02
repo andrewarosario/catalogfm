@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'bulk',
     loadChildren: () => import('./scrobble-bulk/scrobble-bulk.module').then(m => m.ScrobbleBulkModule)
-  }
+  },
+  {
+    path: 'cache',
+    loadChildren: () => import('./scrobble-cache/scrobble-cache.module').then(m => m.ScrobbleCacheModule)
+  },
 ];
 
 @NgModule({
