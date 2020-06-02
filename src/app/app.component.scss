@@ -7,3 +7,12 @@ mat-toolbar {
 .container {
   margin: 2vh;
 }
+
+.user-container {
+  display: flex;
+  align-items: center;
+}
+
+.user-container-name {
+  font-size: 16px;
+}

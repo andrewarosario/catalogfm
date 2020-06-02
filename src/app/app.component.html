@@ -3,7 +3,14 @@
   <h1>Catalog.fm</h1>
 
   <ng-container *ngIf="(facade.user$ | async) as user">
-    <span>{{ user.name }}</span>
+
+    <div class="user-container">
+      <span class="user-container-name">{{ user.name }}</span>
+      <button (click)="facade.logout()" mat-button>
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+
   </ng-container>
 
 </mat-toolbar>
