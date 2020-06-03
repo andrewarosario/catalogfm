@@ -30,7 +30,7 @@ export class ScrobbleService {
       : this.addScrobbleToIndexedDb(track);
   }
 
-  private scrobbleToLastfm(track: TrackScrobble, timestamp = moment().unix()): Observable<ScrobbleResponseType> {
+  public scrobbleToLastfm(track: TrackScrobble, timestamp = moment().unix()): Observable<ScrobbleResponseType> {
     return this.lastfmUserService
       .scrobble(this.userService.user.key, track, timestamp)
       .pipe(mapTo(ScrobbleResponseType.Lastfm));
@@ -43,7 +43,6 @@ export class ScrobbleService {
   }
 
   private sendScrobblesInCache() {
-
     this.authOnlineService.isLogged$().pipe(
       filter(isLogged => isLogged),
       switchMap(() => this.indexedDbScrobbles.getAll()),

@@ -1,1 +1,37 @@
-<p>scrobble-cache works!</p>
+<mat-nav-list>
+  <h2 mat-subheader>Scrobbles em Cache</h2>
+  <ng-container *ngIf="facade.tracks$ | async as tracks">
+    <ng-container *ngIf="tracks.length > 0; else noTracks">
+      <div class="actions">
+        <button
+          (click)="facade.scrobbleAllAndClearCache(tracks)"
+          class="actions-scrobble-all"
+          mat-raised-button
+          color="secondary">
+          <mat-icon>send</mat-icon>Scrobblar tudo
+        </button>
+        <button
+          (click)="facade.clear()"
+          mat-raised-button
+          color="primary">
+          <mat-icon>delete</mat-icon>Limpar
+        </button>
+      </div>
+      <mat-list-item *ngFor="let track of tracks">
+        <a matLine>{{ track.artist }}</a>
+        <a matLine>{{ track.song }}</a>
+        <button mat-icon-button color="secondary" (click)="facade.scrobbleAndRemoveFromCache(track)">
+          <mat-icon>send</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="facade.remove(track.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </ng-container>
+  </ng-container>
+</mat-nav-list>
+
+<ng-template #noTracks>
+  <h3 style="text-align: center;">Não há faixas no cache!</h3>
+</ng-template>
+
