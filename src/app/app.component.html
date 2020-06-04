@@ -12,7 +12,6 @@
       <mat-divider></mat-divider>
 
       <mat-list-item *ngIf="facade.user$ | async; else login" (click)="facade.logout(); sidenav.close()">
-        <mat-icon matListIcon>arrow_forward</mat-icon>
         <h3 matLine>Logout</h3>
       </mat-list-item>
 
