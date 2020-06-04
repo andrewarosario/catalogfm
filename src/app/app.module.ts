@@ -5,10 +5,14 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { MenuResourcesComponent } from './core/components/menu-resources/menu-resources.component';
+import { MenuHeaderComponent } from './core/components/menu-header/menu-header.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuResourcesComponent,
+    MenuHeaderComponent
   ],
   imports: [
     CoreModule,

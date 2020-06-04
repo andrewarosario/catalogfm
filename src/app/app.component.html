@@ -1,20 +1,38 @@
-<mat-toolbar color="primary">
+<mat-sidenav-container class="sidenav-container">
 
-  <h1>Catalog.fm</h1>
+  <mat-sidenav #sidenav class="sidenav">
+    <mat-toolbar color="primary" class="mat-elevation-z2">
+        {{ (facade.user$ | async)?.name || 'Catalog.fm' }}
+    </mat-toolbar>
 
-  <ng-container *ngIf="(facade.user$ | async) as user">
+    <app-menu-resources
+      [menuControl]="true"
+      (closeMenu)="sidenav.close()">
 
-    <div class="user-container">
-      <span class="user-container-name">{{ user.name }}</span>
-      <button (click)="facade.logout()" mat-button>
-        <mat-icon>logout</mat-icon>
-      </button>
+      <mat-divider></mat-divider>
+
+      <mat-list-item *ngIf="facade.user$ | async; else login" (click)="facade.logout(); sidenav.close()">
+        <mat-icon matListIcon>arrow_forward</mat-icon>
+        <h3 matLine>Logout</h3>
+      </mat-list-item>
+
+      <ng-template #login>
+        <mat-list-item [routerLink]="['/auth']" (click)="sidenav.close()">
+          <h3 matLine>Login</h3>
+        </mat-list-item>
+      </ng-template>
+
+    </app-menu-resources>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-menu-header [sidenav]="sidenav"></app-menu-header>
+
+    <div class="container">
+      <router-outlet></router-outlet>
     </div>
 
-  </ng-container>
+  </mat-sidenav-content>
 
-</mat-toolbar>
-
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+</mat-sidenav-container>

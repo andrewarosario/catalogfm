@@ -16,7 +16,6 @@ const routes: Routes = [
   },
   {
     path: 'scrobble',
-    canActivate: [ LastfmAuthGuard ],
     loadChildren: () => import('./scrobble/scrobble.module').then(m => m.ScrobbleModule)
   },
 ];
