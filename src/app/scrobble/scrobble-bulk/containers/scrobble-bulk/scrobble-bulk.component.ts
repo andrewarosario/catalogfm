@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ScrobbleBulkFacade } from '../../scrobble-bulk.facade';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ScrobbleResponseType } from 'src/app/core/models/scrobble-response-type';
 import { finalize } from 'rxjs/operators';
+import { MessageService } from 'src/app/shared/services/message.service';
 
 @Component({
   selector: 'app-scrobble-bulk',
@@ -18,7 +18,7 @@ export class ScrobbleBulkComponent implements OnInit {
   constructor(
     public facade: ScrobbleBulkFacade,
     private formBuilder: FormBuilder,
-    private matSnackBar: MatSnackBar
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -33,8 +33,8 @@ export class ScrobbleBulkComponent implements OnInit {
 
     this.facade.scrobble(textScrobble).pipe(finalize(() => this.loadingRequest = false))
     .subscribe(
-      res => this.matSnackBar.open(this.getResponseMessage(res), 'Ok', { duration: 3000, verticalPosition: 'top'}),
-      err => this.matSnackBar.open('Erro ao scrobblar as faixas!', 'Ok', { duration: 3000, verticalPosition: 'top'}),
+      res => this.messageService.open(this.getResponseMessage(res)),
+      err => this.messageService.open('Erro ao scrobblar as faixas!'),
     );
   }
 

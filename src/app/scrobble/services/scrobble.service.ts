@@ -7,7 +7,7 @@ import { mapTo, switchMap, tap, filter } from 'rxjs/operators';
 import { ScrobbleResponseType } from 'src/app/core/models/scrobble-response-type';
 import { Observable, forkJoin } from 'rxjs';
 import { AuthOnlineService } from 'src/app/core/services/auth-online.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MessageService } from 'src/app/shared/services/message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class ScrobbleService {
     private lastfmUserService: LastfmUserService,
     private indexedDbScrobbles: IndexedDbScrobbles,
     private authOnlineService: AuthOnlineService,
-    private matSnackBar: MatSnackBar
+    private messageService: MessageService
   ) {
     this.sendScrobblesInCache();
   }
@@ -57,11 +57,7 @@ export class ScrobbleService {
         ? 'faixas foram scrobbladas'
         : 'faixa foi scrobblada'} do cache`;
 
-      this.matSnackBar.open(
-        textResponse,
-        'Ok',
-        { duration: 3000, verticalPosition: 'top'}
-      );
+      this.messageService.open(textResponse);
     });
   }
 

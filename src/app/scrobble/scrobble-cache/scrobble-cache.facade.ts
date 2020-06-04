@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ScrobbleService } from '../services/scrobble.service';
 import { IndexedDbScrobbles } from 'src/app/indexed-db/tables/indexed-db-scrobbles';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { tap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
+import { MessageService } from 'src/app/shared/services/message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class ScrobbleCacheFacade {
   constructor(
     private scrobbleService: ScrobbleService,
     private indexedDbScrobbles: IndexedDbScrobbles,
-    private matSnackBar: MatSnackBar,
+    private messageService: MessageService,
   ) {}
 
 
@@ -23,9 +23,9 @@ export class ScrobbleCacheFacade {
       .subscribe(
         () => {
           this.indexedDbScrobbles.delete(track.id);
-          this.matSnackBar.open('Faixa scrobblada!', 'Ok', { duration: 3000, verticalPosition: 'top'});
+          this.messageService.open('Faixa scrobblada!');
         },
-        err => this.matSnackBar.open('Não foi possível realizar o scrobble!', 'Ok', { duration: 3000, verticalPosition: 'top'})
+        err => this.messageService.open('Não foi possível realizar o scrobble!')
       );
   }
 
@@ -33,8 +33,8 @@ export class ScrobbleCacheFacade {
     const tracksToScrobble = tracks.map(track => this.scrobbleService.scrobble(track));
     forkJoin(tracksToScrobble).pipe(tap(() => this.clear()))
     .subscribe(
-      () => this.matSnackBar.open('Faixas scrobbladas!', 'Ok', { duration: 3000, verticalPosition: 'top'}),
-      err => this.matSnackBar.open('Não foi possível realizar os scrobbles!', 'Ok', { duration: 3000, verticalPosition: 'top'})
+      () => this.messageService.open('Faixas scrobbladas!'),
+      err => this.messageService.open('Não foi possível realizar os scrobbles!')
     );
   }
 
